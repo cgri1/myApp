@@ -22,15 +22,10 @@ class Developer extends Component {
             index: 0
         }
 
-        this.createData = this.createData.bind(this);
         this.voted = this.voted.bind(this);
         this.getVotedList = this.getVotedList.bind(this)
         this.endStoryList = this.endStoryList.bind(this)
         this.getVotedList()
-    }
-
-    createData(name, calories, fat) {
-        return { name, calories, fat };
     }
 
     voted(vote) {
