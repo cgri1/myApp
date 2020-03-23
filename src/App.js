@@ -31,83 +31,89 @@ class App extends Component {
   }
 
   setSessionName(event) {
-    this.setState({
-      sessionName: event.target.value
-    })
+    if (event.target.value.length < 200) {
+      this.setState({
+        sessionName: event.target.value
+      })
+    }
   }
 
   setNumberOfVote(event) {
-    this.setState({
-      numberOfVoter: event.target.value
-    })
+    if (parseInt(event.target.value) !== 0) {
+      this.setState({
+        numberOfVoter: event.target.value
+      })
+    }
   }
 
   startSession() {
-    this.props.history.push('/scrummaster')
-    let arrayOfData = []
-    arrayOfData.push(this.state.sessionName)
-    arrayOfData.push(this.state.numberOfVoter)
-    arrayOfData.push(this.state.storyList)
-    data.setData(arrayOfData)
+    if (this.state.numberOfVoter !== 0 && this.state.sessionName !== "") {
+      this.props.history.push('/scrummaster')
+      let arrayOfData = []
+      arrayOfData.push(this.state.sessionName)
+      arrayOfData.push(this.state.numberOfVoter)
+      arrayOfData.push(this.state.storyList)
+      data.setData(arrayOfData)
 
-    //initial vote status
-    let arrayOfVoteStatus = []
-    for (let x = 1; x <= this.state.numberOfVoter; x++) {
+      //initial vote status
+      let arrayOfVoteStatus = []
+      for (let x = 1; x <= this.state.numberOfVoter; x++) {
+        this.arrayOfVoter = {}
+        this.arrayOfVoter.name = "Voter " + x + " : "
+        this.arrayOfVoter.status = "Not Voted"
+        this.arrayOfVoter.point = "0"
+        arrayOfVoteStatus.push(this.arrayOfVoter)
+      }
       this.arrayOfVoter = {}
-      this.arrayOfVoter.name = "Voter " + x + " : "
+      this.arrayOfVoter.name = "Scrum Master : "
       this.arrayOfVoter.status = "Not Voted"
       this.arrayOfVoter.point = "0"
       arrayOfVoteStatus.push(this.arrayOfVoter)
-    }
-    this.arrayOfVoter = {}
-    this.arrayOfVoter.name = "Scrum Master : "
-    this.arrayOfVoter.status = "Not Voted"
-    this.arrayOfVoter.point = "0"
-    arrayOfVoteStatus.push(this.arrayOfVoter)
-    data.setVoteStatus(arrayOfVoteStatus)
+      data.setVoteStatus(arrayOfVoteStatus)
 
-    //initial storylist status
-    this.storyList = this.state.storyList.split("\n")
-    let arrayOfStoryStatus = []
-    for (let x = 0; x < this.storyList.length; x++) {
-      this.arrayOfVoter = {}
-      this.arrayOfVoter.name = this.storyList[x]
-      this.arrayOfVoter.point = " "
-      this.arrayOfVoter.status = "Not Voted"
-      arrayOfStoryStatus.push(this.arrayOfVoter)
-    }
-    data.setStoryList(arrayOfStoryStatus)
-
-    fetch('http://localhost:8080/setData', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sessionName: this.state.sessionName,
-        numberOfVoter: this.state.numberOfVoter,
-        storyList: arrayOfStoryStatus,
-        voteList: arrayOfVoteStatus
-      }),
-    }).then((r) => {
-      return r.json();
-    }).then((rsp) => {
-      if (rsp.success) {
-        console.log("Login Success");
-      } else {
-        console.log(rsp.message);
+      //initial storylist status
+      this.storyList = this.state.storyList.split("\n")
+      let arrayOfStoryStatus = []
+      for (let x = 0; x < this.storyList.length; x++) {
+        this.arrayOfVoter = {}
+        this.arrayOfVoter.name = this.storyList[x]
+        this.arrayOfVoter.point = " "
+        this.arrayOfVoter.status = "Not Voted"
+        arrayOfStoryStatus.push(this.arrayOfVoter)
       }
-    }).catch((e) => {
-      console.log("Login Failure");
-    });
+      data.setStoryList(arrayOfStoryStatus)
+
+      fetch('http://localhost:8080/setData', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionName: this.state.sessionName,
+          numberOfVoter: this.state.numberOfVoter,
+          storyList: arrayOfStoryStatus,
+          voteList: arrayOfVoteStatus
+        }),
+      }).then((r) => {
+        return r.json();
+      }).then((rsp) => {
+        if (rsp.success) {
+          console.log("Login Success");
+        } else {
+          console.log(rsp.message);
+        }
+      }).catch((e) => {
+        console.log("Login Failure");
+      });
+    }
   }
 
   render() {
     return (
       <div className="App">
         <AppBar
-          style={{ backgroundColor: "#282c34"}}
+          style={{ backgroundColor: "#282c34" }}
           position="static"
         > SCRUM POKER </AppBar>
 

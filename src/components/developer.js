@@ -144,7 +144,7 @@ class Developer extends Component {
                 </div>
                 <div style={{
                     width: "350px",
-                    top: "215px",
+                    top: "174px",
                     zIndex: "10",
                     position: "absolute",
                     left: "800px"

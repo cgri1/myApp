@@ -166,7 +166,7 @@ class ScrumMasterPage extends Component {
                 </div>
                 <div style={{
                     width: "350px",
-                    top: "236px",
+                    top: "194px",
                     zIndex: "10",
                     position: "absolute",
                     left: "550px"
@@ -208,7 +208,7 @@ class ScrumMasterPage extends Component {
                 </div>
                 <div style={{
                     width: "350px",
-                    top: "236px",
+                    top: "194px",
                     zIndex: "10",
                     position: "absolute",
                     left: "1000px"
