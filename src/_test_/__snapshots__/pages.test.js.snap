@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index snapshot 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "storeState": Object {
+        "setData": Object {
+          "data": Array [],
+          "flag": false,
+          "storyList": Array [],
+          "votedList": Array [],
+        },
+      },
+    }
+  }
+>
+  <Pages />
+</ContextProvider>
+`;
+
+exports[`Page snapshot 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "storeState": Object {
+        "setData": Object {
+          "data": Array [],
+          "flag": false,
+          "storyList": Array [],
+          "votedList": Array [],
+        },
+      },
+    }
+  }
+>
+  <Pages />
+</ContextProvider>
+`;
