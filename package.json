@@ -9,7 +9,7 @@
     "babel-jest": "^23.6.0",
     "body-parser": "^1.19.0",
     "jest": "^23.6.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.23",
     "material-ui": "^0.20.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
